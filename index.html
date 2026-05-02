@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iOS Glass UI</title>
+<title>Mini Glass UI</title>
 
 <style>
 * {
@@ -16,29 +16,33 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top, #1a1a2e, #0a0a14);
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* BACKGROUND LEBIH TERANG BIAR GLASS KELIATAN */
+  background: linear-gradient(135deg, #2a2a40, #0f172a);
+  font-family: sans-serif;
   color: white;
 }
 
-/* Glass Card */
+/* CARD LEBIH KECIL */
 .card {
-  padding: 30px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(25px);
+  padding: 20px;
+  border-radius: 20px;
+  width: 200px;
+
+  /* GLASS YANG LEBIH KELIATAN */
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.5),
-    inset 0 1px 1px rgba(255,255,255,0.2);
-  width: 260px;
+    0 8px 25px rgba(0,0,0,0.4),
+    inset 0 1px 1px rgba(255,255,255,0.3);
 }
 
-/* ================= TOGGLE ================= */
+/* TOGGLE */
 .toggle {
   position: relative;
-  width: 60px;
-  height: 34px;
-  margin-bottom: 30px;
+  width: 50px;
+  height: 28px;
+  margin: 10px 0 20px;
 }
 
 .toggle input {
@@ -49,73 +53,38 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 50px;
-  background: rgba(255,255,255,0.15);
-  transition: 0.4s;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.25);
+  transition: 0.3s;
 }
 
 .slider-toggle::before {
   content: "";
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   left: 3px;
   top: 3px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #fff, #dcdcdc);
-  transition: 0.4s cubic-bezier(0.25,1.5,0.5,1);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  background: white;
+  transition: 0.3s;
 }
 
 .toggle input:checked + .slider-toggle {
-  background: linear-gradient(135deg, #4cd964, #2ecc71);
-  box-shadow: 0 0 15px rgba(76,217,100,0.7);
+  background: #4cd964;
 }
 
 .toggle input:checked + .slider-toggle::before {
-  transform: translateX(26px);
+  transform: translateX(22px);
 }
 
-/* ================= VOLUME SLIDER ================= */
-.range-container {
-  margin-top: 10px;
-}
-
+/* SLIDER */
 .range {
-  -webkit-appearance: none;
   width: 100%;
-  height: 10px;
-  border-radius: 50px;
-  background: rgba(255,255,255,0.15);
-  outline: none;
-  backdrop-filter: blur(10px);
-}
-
-/* track fill (fake iOS feel) */
-.range::-webkit-slider-runnable-track {
-  height: 10px;
-  border-radius: 50px;
-}
-
-.range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #fff, #dcdcdc);
-  cursor: pointer;
-  margin-top: -6px;
-  transition: 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-
-.range::-webkit-slider-thumb:active {
-  transform: scale(1.2);
 }
 
 .value {
-  margin-top: 10px;
-  font-size: 14px;
+  font-size: 13px;
+  margin-top: 5px;
   opacity: 0.8;
 }
 </style>
@@ -126,24 +95,22 @@ body {
 <div class="card">
   <div>Power</div>
   <label class="toggle">
-    <input type="checkbox" id="power">
+    <input type="checkbox">
     <span class="slider-toggle"></span>
   </label>
 
   <div>Volume</div>
-  <div class="range-container">
-    <input type="range" min="0" max="100" value="50" class="range" id="volume">
-    <div class="value">50%</div>
-  </div>
+  <input type="range" min="0" max="100" value="50" class="range" id="vol">
+  <div class="value" id="val">50%</div>
 </div>
 
 <script>
-const slider = document.getElementById("volume");
-const value = document.querySelector(".value");
+const v = document.getElementById("vol");
+const val = document.getElementById("val");
 
-slider.addEventListener("input", () => {
-  value.textContent = slider.value + "%";
-});
+v.oninput = () => {
+  val.textContent = v.value + "%";
+};
 </script>
 
 </body>
