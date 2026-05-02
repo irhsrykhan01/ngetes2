@@ -5,79 +5,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
-  background: radial-gradient(circle at top, #1a1a2e, #0a0a14);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* BACKGROUND TERANG */
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  font-family: sans-serif;
 }
 
-/* LIQUID CARD */
-.box {
-  width: 120px;
-  height: 120px;
-  border-radius: 30px;
+/* CONTAINER AUTO RESPONSIVE */
+.wrapper {
+  width: 90vw;
+  max-width: 320px;
+}
 
-  background: rgba(255,255,255,0.08);
+/* GLASS PILL */
+.glass {
   backdrop-filter: blur(25px);
+  background: rgba(255,255,255,0.25);
+  border-radius: 30px;
+  padding: 15px;
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.5),
-    inset 0 1px 2px rgba(255,255,255,0.2);
-
-  position: relative;
+    0 10px 30px rgba(0,0,0,0.15),
+    inset 0 1px 2px rgba(255,255,255,0.4);
 }
 
-/* DRAG BUTTON */
-.knob {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+/* ================= TOGGLE ================= */
+.toggle {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  margin-bottom: 20px;
+}
 
-  background: linear-gradient(145deg,#fff,#dcdcdc);
+.toggle input {
+  display: none;
+}
+
+.track {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  inset: 0;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.5);
+  transition: 0.3s;
+}
 
-  cursor: grab;
-  transition: transform 0.2s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+.track::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 3px;
+  left: 3px;
+  border-radius: 50%;
+  background: white;
+  transition: 0.3s cubic-bezier(0.25,1.5,0.5,1);
+}
+
+.toggle input:checked + .track {
+  background: #4cd964;
+}
+
+.toggle input:checked + .track::before {
+  transform: translateX(22px);
+}
+
+/* ================= SLIDER ================= */
+.slider-wrap {
+  position: relative;
+  height: 30px;
+}
+
+.range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  position: absolute;
+  z-index: 2;
+}
+
+/* TRACK GLASS */
+.track-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(10px);
+}
+
+/* THUMB */
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.range::-webkit-slider-thumb:active {
+  transform: scale(1.2);
 }
 </style>
 </head>
 
 <body>
 
-<div class="box" id="box">
-  <div class="knob" id="knob"></div>
+<div class="wrapper">
+  <div class="glass">
+
+    <!-- TOGGLE -->
+    <label class="toggle">
+      <input type="checkbox">
+      <span class="track"></span>
+    </label>
+
+    <!-- SLIDER -->
+    <div class="slider-wrap">
+      <div class="track-bg"></div>
+      <input type="range" min="0" max="100" value="50" class="range">
+    </div>
+
+  </div>
 </div>
-
-<script>
-const knob = document.getElementById("knob");
-const box = document.getElementById("box");
-
-let dragging = false;
-
-knob.addEventListener("mousedown", () => dragging = true);
-document.addEventListener("mouseup", () => dragging = false);
-
-document.addEventListener("mousemove", (e) => {
-  if (!dragging) return;
-
-  const rect = box.getBoundingClientRect();
-
-  let x = e.clientX - rect.left - 20;
-  let y = e.clientY - rect.top - 20;
-
-  // batas dalam box
-  x = Math.max(0, Math.min(x, rect.width - 40));
-  y = Math.max(0, Math.min(y, rect.height - 40));
-
-  knob.style.left = x + "px";
-  knob.style.top = y + "px";
-});
-</script>
 
 </body>
 </html>
