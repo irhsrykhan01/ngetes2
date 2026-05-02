@@ -3,114 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini Glass UI</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   height: 100vh;
+  background: radial-gradient(circle at top, #1a1a2e, #0a0a14);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* BACKGROUND LEBIH TERANG BIAR GLASS KELIATAN */
-  background: linear-gradient(135deg, #2a2a40, #0f172a);
-  font-family: sans-serif;
-  color: white;
 }
 
-/* CARD LEBIH KECIL */
-.card {
-  padding: 20px;
-  border-radius: 20px;
-  width: 200px;
+/* LIQUID CARD */
+.box {
+  width: 120px;
+  height: 120px;
+  border-radius: 30px;
 
-  /* GLASS YANG LEBIH KELIATAN */
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(25px);
   box-shadow:
-    0 8px 25px rgba(0,0,0,0.4),
-    inset 0 1px 1px rgba(255,255,255,0.3);
-}
+    0 10px 40px rgba(0,0,0,0.5),
+    inset 0 1px 2px rgba(255,255,255,0.2);
 
-/* TOGGLE */
-.toggle {
   position: relative;
-  width: 50px;
-  height: 28px;
-  margin: 10px 0 20px;
 }
 
-.toggle input {
-  display: none;
-}
-
-.slider-toggle {
-  position: absolute;
-  inset: 0;
-  border-radius: 50px;
-  background: rgba(255,255,255,0.25);
-  transition: 0.3s;
-}
-
-.slider-toggle::before {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  left: 3px;
-  top: 3px;
+/* DRAG BUTTON */
+.knob {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: white;
-  transition: 0.3s;
-}
 
-.toggle input:checked + .slider-toggle {
-  background: #4cd964;
-}
+  background: linear-gradient(145deg,#fff,#dcdcdc);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 
-.toggle input:checked + .slider-toggle::before {
-  transform: translateX(22px);
-}
-
-/* SLIDER */
-.range {
-  width: 100%;
-}
-
-.value {
-  font-size: 13px;
-  margin-top: 5px;
-  opacity: 0.8;
+  cursor: grab;
+  transition: transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <div>Power</div>
-  <label class="toggle">
-    <input type="checkbox">
-    <span class="slider-toggle"></span>
-  </label>
-
-  <div>Volume</div>
-  <input type="range" min="0" max="100" value="50" class="range" id="vol">
-  <div class="value" id="val">50%</div>
+<div class="box" id="box">
+  <div class="knob" id="knob"></div>
 </div>
 
 <script>
-const v = document.getElementById("vol");
-const val = document.getElementById("val");
+const knob = document.getElementById("knob");
+const box = document.getElementById("box");
 
-v.oninput = () => {
-  val.textContent = v.value + "%";
-};
+let dragging = false;
+
+knob.addEventListener("mousedown", () => dragging = true);
+document.addEventListener("mouseup", () => dragging = false);
+
+document.addEventListener("mousemove", (e) => {
+  if (!dragging) return;
+
+  const rect = box.getBoundingClientRect();
+
+  let x = e.clientX - rect.left - 20;
+  let y = e.clientY - rect.top - 20;
+
+  // batas dalam box
+  x = Math.max(0, Math.min(x, rect.width - 40));
+  y = Math.max(0, Math.min(y, rect.height - 40));
+
+  knob.style.left = x + "px";
+  knob.style.top = y + "px";
+});
 </script>
 
 </body>
