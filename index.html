@@ -1,144 +1,111 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Aesthetic Link</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-<style>
-* {
-  box-sizing: border-box;
-}
+        body {
+            /* Background gradasi estetik */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
 
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); /* Efek kaca transparan */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
 
-  /* BACKGROUND TERANG */
-  background: linear-gradient(135deg, #89f7fe, #66a6ff);
-  font-family: sans-serif;
-}
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
 
-/* CONTAINER AUTO RESPONSIVE */
-.wrapper {
-  width: 90vw;
-  max-width: 320px;
-}
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
 
-/* GLASS PILL */
-.glass {
-  backdrop-filter: blur(25px);
-  background: rgba(255,255,255,0.25);
-  border-radius: 30px;
-  padding: 15px;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.15),
-    inset 0 1px 2px rgba(255,255,255,0.4);
-}
+        p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
 
-/* ================= TOGGLE ================= */
-.toggle {
-  position: relative;
-  width: 50px;
-  height: 28px;
-  margin-bottom: 20px;
-}
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-.toggle input {
-  display: none;
-}
+        .link-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
 
-.track {
-  position: absolute;
-  inset: 0;
-  border-radius: 50px;
-  background: rgba(255,255,255,0.5);
-  transition: 0.3s;
-}
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-.track::before {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  top: 3px;
-  left: 3px;
-  border-radius: 50%;
-  background: white;
-  transition: 0.3s cubic-bezier(0.25,1.5,0.5,1);
-}
+        /* Animasi masuk */
+        .container {
+            animation: fadeIn 1.2s ease-out;
+        }
 
-.toggle input:checked + .track {
-  background: #4cd964;
-}
-
-.toggle input:checked + .track::before {
-  transform: translateX(22px);
-}
-
-/* ================= SLIDER ================= */
-.slider-wrap {
-  position: relative;
-  height: 30px;
-}
-
-.range {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 30px;
-  background: transparent;
-  position: absolute;
-  z-index: 2;
-}
-
-/* TRACK GLASS */
-.track-bg {
-  position: absolute;
-  inset: 0;
-  border-radius: 50px;
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(10px);
-}
-
-/* THUMB */
-.range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.range::-webkit-slider-thumb:active {
-  transform: scale(1.2);
-}
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="wrapper">
-  <div class="glass">
+    <div class="container">
+        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
+        
+        <h1>@UsernameKamu</h1>
+        <p>Digital Creator | Aesthetic Enthusiast</p>
 
-    <!-- TOGGLE -->
-    <label class="toggle">
-      <input type="checkbox">
-      <span class="track"></span>
-    </label>
-
-    <!-- SLIDER -->
-    <div class="slider-wrap">
-      <div class="track-bg"></div>
-      <input type="range" min="0" max="100" value="50" class="range">
+        <div class="links">
+            <a href="#" class="link-card">Instagram</a>
+            <a href="#" class="link-card">TikTok</a>
+            <a href="#" class="link-card">YouTube Channel</a>
+            <a href="#" class="link-card">WhatsApp Me</a>
+        </div>
     </div>
-
-  </div>
-</div>
 
 </body>
 </html>
