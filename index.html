@@ -3,109 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Aesthetic Link</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Liquid Glass OS</title>
     <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.15);
+            --border: rgba(255, 255, 255, 0.3);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
-            /* Background gradasi estetik */
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Background Aesthetic - Bisa ganti ke foto kamu */
+            background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1000') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: white;
+            overflow: hidden;
+        }
+
+        /* Frame HP */
+        .phone-screen {
+            width: 360px;
+            height: 740px;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--border);
+            border-radius: 40px;
             padding: 20px;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px); /* Efek kaca transparan */
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid white;
-            margin-bottom: 15px;
-            object-fit: cover;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 30px;
-        }
-
-        .links {
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
-        .link-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
             color: white;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            padding: 5px 15px;
+            margin-bottom: 20px;
         }
 
-        .link-card:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: translateY(-3px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+        /* Widget Jam & Weather */
+        .widget-clock {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
         }
 
-        /* Animasi masuk */
-        .container {
-            animation: fadeIn 1.2s ease-out;
+        .widget-clock h1 { font-size: 3rem; font-weight: 300; }
+
+        /* Grid Aplikasi */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 10px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .app-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .icon-box:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .app-name { color: white; font-size: 10px; }
+
+        /* Music Player Widget */
+        .music-player {
+            margin-top: auto;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .album-art {
+            width: 50px;
+            height: 50px;
+            background: #444;
+            border-radius: 10px;
+        }
+
+        .music-info marquee { width: 180px; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
-        
-        <h1>@UsernameKamu</h1>
-        <p>Digital Creator | Aesthetic Enthusiast</p>
+    <div class="phone-screen">
+        <div class="status-bar">
+            <span id="time">12:00</span>
+            <span>📶 🔋 100%</span>
+        </div>
 
-        <div class="links">
-            <a href="#" class="link-card">Instagram</a>
-            <a href="#" class="link-card">TikTok</a>
-            <a href="#" class="link-card">YouTube Channel</a>
-            <a href="#" class="link-card">WhatsApp Me</a>
+        <div class="widget-clock">
+            <h1 id="big-time">12:00</h1>
+            <p>Sabtu, 2 Mei 2026</p>
+        </div>
+
+        <div class="app-grid">
+            <div class="app-icon">
+                <div class="icon-box">🎮</div>
+                <span class="app-name">Roblox</span>
+            </div>
+            <div class="app-icon">
+                <div class="icon-box">📸</div>
+                <span class="app-name">Camera</span>
+            </div>
+            <div class="app-icon">
+                <div class="icon-box">💬</div>
+                <span class="app-name">Chat</span>
+            </div>
+            <div class="app-icon">
+                <div class="icon-box">🎵</div>
+                <span class="app-name">Music</span>
+            </div>
+        </div>
+
+        <div class="music-player">
+            <div class="album-art"></div>
+            <div class="music-info">
+                <marquee behavior="scroll" direction="left">🎵 Now Playing: Dangdut Koplo Remix 2026</marquee>
+                <div style="font-size: 10px; opacity: 0.7;">02:45 / 04:20</div>
+            </div>
         </div>
     </div>
 
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                          now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('time').innerText = timeStr;
+            document.getElementById('big-time').innerText = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
 </body>
 </html>
